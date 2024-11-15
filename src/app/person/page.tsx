@@ -26,15 +26,11 @@ export default function Taste() {
   const tasteChoice = () => {
     switch (tasteNumber) {
       case 2:
-        return "/images/yy_taste_2.png";
+        return "/images/yy_person_2.png";
       case 3:
-        return "/images/yy_taste_3.png";
-      case 4:
-        return "/images/yy_taste_4.png";
-      case 5:
-        return "/images/yy_taste_5.png";
+        return "/images/yy_person_3.png";
       default:
-        return "/images/yy_taste_1.png";
+        return "/images/yy_person_1.png";
     }
   };
 
@@ -57,18 +53,18 @@ export default function Taste() {
             fontFamily: "Galindo",
           }}
         >
-          What’s your food taste?
+          What kind of person are you?
         </div>
         <Image
           src={tasteChoice()}
-          alt="taste choice"
+          alt="person choice"
           width={720}
           height={592}
           style={{ marginTop: "40px" }}
           onClick={() => setTasteNumber(tasteNumber + 1)}
         />
         <FooterWrapper>
-          <LongOrangeButton active={true} onClick={() => router.push("/person")}>
+          <LongOrangeButton active={true} onClick={() => router.push("/home")}>
             {"Let’s get started!"}
           </LongOrangeButton>
         </FooterWrapper>
