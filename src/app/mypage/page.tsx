@@ -5,7 +5,6 @@ import Footer from "@/layout/Footer";
 import Image from "next/image";
 import MyPageTab from "@/components/common/MypageTab";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import CldVideoPlayer from "@/components/CldVideoPlayer";
 import colors from "@/styles/color";
 import { Body2Semibold } from "@/styles/texts";
 import SlideUpModal from "@/components/base/SlideUpModal";

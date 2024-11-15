@@ -1,7 +1,7 @@
 const colors = {
   primary: "#FFC10E",
-  primaryHover: "#FF7947",
-  primaryActive: "#E65116",
+  primaryHover: "#E5AD0D",
+  primaryActive: "#CC990C",
   white: "#FFFFFF",
   black: "#000000",
   grey1: "#FAFAFB",

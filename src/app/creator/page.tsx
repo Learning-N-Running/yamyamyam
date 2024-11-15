@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { signContract } from "@/lib/sign/sign-contract";
 import colors from "@/styles/color";
 import Image from "next/image";
-import CldVideoPlayer from "@/components/CldVideoPlayer";
 import SlideUpModal from "@/components/base/SlideUpModal";
 import { Heading2 } from "@/styles/texts";
 import Modal from "@/components/common/Modal";
@@ -46,20 +45,6 @@ export default function Creator() {
       <Container>
         {isFileUpload ? (
           <>
-            <CldVideoPlayer
-              width="768"
-              height="498"
-              src="jangwon-restaurant_j0ycl3"
-              logo={{
-                imageUrl: "/images/hs_favicon.png",
-              }}
-              autoplay
-              //여기는 잘 모르겠음
-              // sourceTypes={["hls"]}
-              // transformation={{
-              //   streaming_profile: "hd",
-              // }}
-            />
             <Image
               src="/images/hs_add_location.svg"
               alt="add location"

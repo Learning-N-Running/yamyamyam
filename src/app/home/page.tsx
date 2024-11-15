@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import HomeSearchBar from "@/components/common/HomeSearchBar";
-import CldVideoPlayer from "@/components/CldVideoPlayer";
 import InteractionButtons from "./InteractionButtons";
 import InfoTab from "./InfoTab";
 import SlideUpModal from "@/components/base/SlideUpModal";
@@ -55,34 +54,7 @@ export default function Home() {
     <>
       <Container>
         <HomeSearchBar />
-        <VideoContainer isGoDown={isGoDown}>
-          <CldVideoPlayer
-            width="768"
-            height="1024"
-            src="rest_5_doizt5"
-            logo={{
-              imageUrl: "/images/hs_favicon.png",
-            }}
-            autoplay={true}
-            sourceTypes={["hls"]}
-            transformation={{
-              streaming_profile: "hd",
-            }}
-          />
-          <CldVideoPlayer
-            width="768"
-            height="1024"
-            src="rest_4_q5pone"
-            logo={{
-              imageUrl: "/images/hs_favicon.png",
-            }}
-            autoplay={true}
-            sourceTypes={["hls"]}
-            transformation={{
-              streaming_profile: "hd",
-            }}
-          />
-        </VideoContainer>
+        <VideoContainer isGoDown={isGoDown}></VideoContainer>
         <div style={{ width: "100%", height: "50%" }}>
           <InteractionButtons />
           <InfoTab
