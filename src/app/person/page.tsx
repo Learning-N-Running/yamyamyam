@@ -29,6 +29,8 @@ export default function Taste() {
         return "/images/yy_person_2.png";
       case 3:
         return "/images/yy_person_3.png";
+      case 4:
+        return "/images/yy_person_4.png";
       default:
         return "/images/yy_person_1.png";
     }

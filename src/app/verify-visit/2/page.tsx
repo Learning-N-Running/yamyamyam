@@ -32,13 +32,24 @@ export default function VerifyVisit_2() {
     <>
       <Container>
         {isFileUpload ? (
-          <Image
-            src="/images/yy_verify_2_active.svg"
+          <>
+            <Image
+            src="/images/yy_verify_visit_2.svg"
             width={768}
-            height={723}
+            height={699}
             alt="verify"
-            style={{ marginBottom: "6px" }}
+            onClick={handleImageClick} // 이미지를 클릭하면 파일 선택창이 열리게 설정
+            style={{ marginTop: "30px", marginBottom: "30px" }}
           />
+          <Image
+          src="/images/yy_verify_visit_2_content.svg"
+          width={768}
+          height={699}
+          alt="verify"
+          onClick={handleImageClick} // 이미지를 클릭하면 파일 선택창이 열리게 설정
+          style={{ marginTop: "30px", marginBottom: "30px" }}
+        />
+        </>
         ) : (
           <>
             <Image
@@ -56,6 +67,8 @@ export default function VerifyVisit_2() {
               ref={fileInputRef}
               onChange={handleFileChange} // 파일 선택 시 동작
             />
+
+
           </>
         )}
         <div style={{ width: "100%", padding: "0 24px" }}>

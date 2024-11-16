@@ -54,7 +54,7 @@ export default function VerifyVisit_1() {
             }}
           >
             <Image
-              src="/images/yy_verify_1_dummy.JPG"
+              src="/images/yy_receipt.png"
               alt="verify"
               layout="fill"
               objectFit="contain"
