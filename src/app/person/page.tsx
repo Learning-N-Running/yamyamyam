@@ -49,10 +49,10 @@ export default function Taste() {
           <ModalContainer>
             <Image
               src="/images/yy_profile_created.svg"
-              width={292}
-              height={292}
+              width={228}
+              height={192}
               alt="profile created"
-              style={{ marginBottom: "-55px" }}
+              style={{ marginBottom: "16px" }}
             />
             <h1 style={{ fontFamily: "Galindo", fontSize: "28px" }}>
               {"Profile Created"}

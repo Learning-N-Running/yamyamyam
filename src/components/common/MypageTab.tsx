@@ -31,7 +31,7 @@ export default function MyPageTab({
 
   return (
     <>
-      <div className="flex flex-row justify-center px-4">
+      <div className="flex justify-center px-6">
         {tabs.map((tab, index) => (
           <div
             key={tab.name}
@@ -70,23 +70,23 @@ export default function MyPageTab({
 
 const MapContent = () => {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex justify-center">
       <Image
-      src={"/images/yy_mypage_map_content.svg"}
-      alt="map"
-      width={770}
-      height={498}
-      style={{ cursor: "pointer", margin: "16px"}}
+        src={"/images/yy_map_mypage.png"}
+        alt="map"
+        width={721}
+        height={759}
+        style={{ cursor: "pointer", marginTop: "16px", marginBottom: "50px" }}
       />
     </div>
   );
-}
+};
 
 const NFTContent = () => {
   return (
-    <div className="flex flex-wrap justify-start max-w-[768px] mx-auto">
+    <div className="flex flex-wrap justify-start max-w-[720px] mx-auto">
       {[...Array(4)].map((_, index) => (
-        <div key={index} className="p-2 w-1/3 flex justify-center">
+        <div key={index} className="p-2 w-1/3 flex justify-center mb-10">
           <Image
             src="/images/yy_mypage_nft_content.svg"
             alt={`nft-${index}`}
@@ -99,3 +99,5 @@ const NFTContent = () => {
     </div>
   );
 };
+
+// public/images/yy_profile_nft_1.svg

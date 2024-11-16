@@ -92,7 +92,7 @@ export default function Mypage() {
             }}
           />
         </nav>
-        <Profile title="Yennie" />
+        <Profile title="Angie" />
         <MyPageTab
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -135,10 +135,10 @@ const Profile = ({ title }: { title: string }) => {
       <div className="flex flex-row items-center justify-start ml-8">
         <Image
           className="rounded-full"
-          src="/images/hs_profile_mypage.svg"
-          alt="mypage_profile"
-          width={100}
-          height={100}
+          src="/images/yy_mypage_profile_img.svg"
+          alt="my page profile"
+          width={126}
+          height={126}
         />
         <div className="flex flex-col items-start justify-center ml-4">
           <h2 className="mt-4 text-3xl font-bold">{title}</h2>
@@ -151,7 +151,7 @@ const Profile = ({ title }: { title: string }) => {
               height={18}
             />
             <p>
-              Following <strong>210K</strong>
+              Following <strong>21</strong>
             </p>
             <Image
               className="ml-4 mr-1"
@@ -161,7 +161,7 @@ const Profile = ({ title }: { title: string }) => {
               height={18}
             />
             <p>
-              Follow <strong>456K</strong>
+              Follow <strong>320</strong>
             </p>
           </div>
         </div>
