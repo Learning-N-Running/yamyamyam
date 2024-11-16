@@ -131,6 +131,13 @@ export default function Mypage() {
 }
 
 const Profile = ({ title, src }: { title: string; src: string }) => {
+
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  const handleFollowClick = () => {
+    setIsFollowed(!isFollowed);
+  };
+
   return (
     <div className="flex flex-col items-start justify-center">
       <div className="flex flex-row items-center justify-start ml-8">
@@ -150,6 +157,27 @@ const Profile = ({ title, src }: { title: string; src: string }) => {
               alt="user_check"
               width={297}
               height={20}
+            />
+          </div>
+          <div className="flex flex-row items-start justify-center">
+            <Image
+              className="mr-1 cursor-pointer"
+              src={
+                isFollowed
+                  ? "/images/yy_clicked_follow.svg"
+                  : "/images/yy_follow_button.svg"
+              }
+              alt="follow_button"
+              width={150}
+              height={44}
+              onClick={handleFollowClick}
+            />
+            <Image
+              className="mr-1 cursor-pointer"
+              src="/images/yy_message_button.svg"
+              alt="message_button"
+              width={150}
+              height={44}
             />
           </div>
         </div>
