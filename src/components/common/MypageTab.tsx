@@ -12,41 +12,29 @@ export default function MyPageTab({
   coinClick: number;
 }) {
   const ColoredLine = () => (
-    <hr className="w-full mt-2 h-1 bg-orange-500 border-none m-0" />
+    <hr className="w-full mt-2 h-1 bg-yellow-500 border-none m-0" />
   );
 
   const tabs = [
     {
-      name: "History",
-      icon: "/images/history_icon.svg",
-      activeIcon: "/images/clicked_history_icon.svg",
+      name: "Map",
+      icon: "/images/yy_map_icon.svg",
+      activeIcon: "/images/yy_clicked_map_icon.svg",
     },
     {
-      name: "Videos",
-      icon: "/images/video.icon.svg",
-      activeIcon: "/images/clicked_video_icon.svg",
-    },
-    {
-      name: "Likes",
-      icon: "/images/heart_icon.svg",
-      activeIcon: "/images/clicked_heart_icon.svg",
-    },
-    {
-      name: "Badge",
-      icon: "/images/badge_icon.svg",
-      activeIcon: "/images/clicked_badge_icon.svg",
+      name: "Visited NFT",
+      icon: "/images/yy_nft_icon.svg",
+      activeIcon: "/images/yy_clicked_nft_icon.svg",
     },
   ];
 
   return (
     <>
-      <div className="flex flex-row justify-center mt-6">
+      <div className="flex flex-row justify-center px-4">
         {tabs.map((tab, index) => (
           <div
             key={tab.name}
-            className={`flex flex-col w-60 ${index === 0 ? "ml-4" : ""} ${
-              index === tabs.length - 1 ? "mr-4" : ""
-            }`}
+            className={`flex flex-col items-center flex-grow`}
           >
             {" "}
             <div className="flex flex-row items-center justify-center">
@@ -59,7 +47,7 @@ export default function MyPageTab({
               />
               <button
                 className={`${
-                  activeTab === tab.name ? "text-orange-500" : "text-gray-500"
+                  activeTab === tab.name ? "text-yellow-500" : "text-gray-500"
                 } font-bold text-lg`}
                 onClick={() => setActiveTab(tab.name)}
               >
@@ -71,38 +59,24 @@ export default function MyPageTab({
         ))}
       </div>
 
-      <div>
-        {activeTab === "History" && <HistoryContent />}
-        {activeTab === "Videos" && <VideoContent coinClick={coinClick} />}
-        {activeTab === "Likes" && <LikesContent />}
-        {activeTab === "Badge" && <BadgeContent />}
+      <div className="mt-4">
+        {activeTab === "Map" &&     
+        <Image
+      src={"/images/yy_mypage_map_content.svg"}
+      alt="map"
+      width={768}
+      height={498}
+      style={{ cursor: "pointer" }}
+    /> }
+        {activeTab === "Visited NFT" &&  
+        <Image
+      src={"/images/yy_mypage_nft_content.svg"}
+      alt="nft"
+      width={234}
+      height={275}
+      style={{ cursor: "pointer", margin: "16px"}}
+    />}
       </div>
     </>
   );
 }
-
-const HistoryContent = () => {
-  return (
-    <Image
-      src={"/images/hs_history.svg"}
-      alt="history"
-      width={768}
-      height={498}
-      style={{ cursor: "pointer" }}
-    />
-  );
-};
-
-const LikesContent = () => {
-  return (
-    <div className="flex flex-row justify-center p-4 place-content-evenly"></div>
-  );
-};
-
-const BadgeContent = () => {
-  return (
-    <div style={{ width: "100%", padding: "0px 24px" }}>
-      <Image src="/images/hs_badge.svg" alt="badge" width={720} height={564} />
-    </div>
-  );
-};

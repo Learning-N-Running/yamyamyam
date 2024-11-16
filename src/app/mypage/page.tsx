@@ -18,7 +18,7 @@ import * as react from "next-auth/react";
 import { signIn } from "next-auth/react";
 
 export default function Mypage() {
-  const [activeTab, setActiveTab] = useState("History");
+  const [activeTab, setActiveTab] = useState("Map");
   const [coinClick, setCoinClick] = useState(0);
   const [isCreator, setIsCreator] = useState(false);
   const [isBecomeCreatorSlideUpModalOpen, setIsBecomeCreatorSlideUpModalOpen] =
@@ -131,36 +131,67 @@ export default function Mypage() {
 
 const Profile = ({ title }: { title: string }) => {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <Image
-        className="rounded-full"
-        src="/images/hs_profile_mypage.svg"
-        alt="mypage_profile"
-        width={100}
-        height={100}
-      />
-      <h2 className="mt-4 text-xl font-bold">{title}</h2>
-      <div className="flex mt-2">
+    <div className="flex flex-col items-start justify-center">
+      <div className="flex flex-row items-center justify-start ml-8">
         <Image
-          className="mr-1"
-          src="/images/user_check.svg"
-          alt="user_check"
-          width={18}
-          height={18}
+          className="rounded-full"
+          src="/images/hs_profile_mypage.svg"
+          alt="mypage_profile"
+          width={100}
+          height={100}
         />
-        <p>
-          Following <strong>210K</strong>
-        </p>
+        <div className="flex flex-col items-start justify-center ml-4">
+          <h2 className="mt-4 text-3xl font-bold">{title}</h2>
+          <div className="flex flex-row  mt-2">
+            <Image
+              className="mr-1"
+              src="/images/user_check.svg"
+              alt="user_check"
+              width={18}
+              height={18}
+            />
+            <p>
+              Following <strong>210K</strong>
+            </p>
+            <Image
+              className="ml-4 mr-1"
+              src="/images/users.svg"
+              alt="users"
+              width={18}
+              height={18}
+            />
+            <p>
+              Follow <strong>456K</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center">
         <Image
-          className="ml-4 mr-1"
-          src="/images/users.svg"
-          alt="users"
-          width={18}
-          height={18}
+          className="mt-5 mb-5"
+          src="/images/yy_mypage_detail.png"
+          alt="profile details"
+          width={704}
+          height={66}
         />
-        <p>
-          Follow <strong>456K</strong>
-        </p>
+      </div>
+      <div className="flex flex-row items-center justify-between "
+      style={{width:'100%',padding:'0 24px'}}>
+        <Image
+          className=""
+          src="/images/yy_mypage_nft_button.svg"
+          alt="profile details"
+          width={356}
+          height={65}
+        />
+        <Image
+          src="/images/yy_mypage_usdc_button.svg"
+          alt="profile details"
+          width={356}
+          height={65}
+          style={{cursor : "pointer"}}
+        />
+
       </div>
     </div>
   );

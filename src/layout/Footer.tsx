@@ -61,7 +61,7 @@ const Container = styled.div<ContainerProps>`
   height: 72px;
   padding: 8px 48px;
 
-  position: fixed;
+  position: sticky;
   left: 0px;
   bottom: 0px;
   z-index: 100;
