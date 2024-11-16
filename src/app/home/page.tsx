@@ -61,7 +61,7 @@ export default function Home() {
       case 2:
         return "/images/yy_home_map3.png";
       case 3:
-        return "/images/yy_home_map2.png";
+        return "/images/yy_home_map_2.png";
       default:
         return "/images/yy_home_map1.png";
     }

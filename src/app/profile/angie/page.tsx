@@ -22,7 +22,6 @@ export default function Mypage() {
   const [coinClick, setCoinClick] = useState(0);
   const [isCreator, setIsCreator] = useState(false);
   const [isSlideUpModalOpen, setIsSlideUpModalOpen] = useState(true);
-
   const [txHash, setTxHash] = useState("");
 
   const onWithdraw = async () => {
@@ -93,7 +92,27 @@ export default function Mypage() {
         isOpen={isSlideUpModalOpen}
         onClose={() => setIsSlideUpModalOpen(false)}
       >
-        <div style={{ width: "100%", marginTop: "64px" }}>안녕하쇼</div>
+        <div 
+        className="flex flex-col items-center justify-center"
+        style={{ width: "100%", marginTop: "64px" }}>
+          <Image
+            src="/images/yy_angie_modal.svg"
+            alt="slide up modal"
+            width={720}
+            height={867}
+            style={{ cursor: "pointer" }}
+            className="mb-10"
+          />
+          <Image
+            src="/images/yy_angie_modal_status.svg"
+            alt="close button"
+            width={728}
+            height={313}
+            style={{ cursor: "pointer" }}
+            className="mb-16"
+            onClick={() => router.push("/verify-visit/1")}
+          />
+        </div>
       </SlideUpModal>
     </>
   );
