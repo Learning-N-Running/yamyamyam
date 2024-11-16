@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import VideoContent from "./VideoContent";
 import Image from "next/image";
+import { N } from "ethers";
 
 export default function MyPageTab({
   activeTab,
@@ -60,23 +61,41 @@ export default function MyPageTab({
       </div>
 
       <div className="mt-4">
-        {activeTab === "Map" &&     
-        <Image
-      src={"/images/yy_mypage_map_content.svg"}
-      alt="map"
-      width={768}
-      height={498}
-      style={{ cursor: "pointer" }}
-    /> }
-        {activeTab === "Visited NFT" &&  
-        <Image
-      src={"/images/yy_mypage_nft_content.svg"}
-      alt="nft"
-      width={234}
-      height={275}
-      style={{ cursor: "pointer", margin: "16px"}}
-    />}
+        {activeTab === "Map" && <MapContent />}
+        {activeTab === "Visited NFT" && <NFTContent />}
       </div>
     </>
   );
 }
+
+const MapContent = () => {
+  return (
+    <div className="flex items-center justify-center">
+      <Image
+      src={"/images/yy_mypage_map_content.svg"}
+      alt="map"
+      width={770}
+      height={498}
+      style={{ cursor: "pointer", margin: "16px"}}
+      />
+    </div>
+  );
+}
+
+const NFTContent = () => {
+  return (
+    <div className="flex flex-wrap justify-start max-w-[768px] mx-auto">
+      {[...Array(4)].map((_, index) => (
+        <div key={index} className="p-2 w-1/3 flex justify-center">
+          <Image
+            src="/images/yy_mypage_nft_content.svg"
+            alt={`nft-${index}`}
+            width={234}
+            height={275}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
