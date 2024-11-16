@@ -66,7 +66,8 @@ const BodyContainer = styled.div<{ controlheader: string }>`
   padding-top: ${({ controlheader }) => controlheader === "/person" && "65px"};
   padding-top: ${({ controlheader }) =>
     controlheader === "/creator-terms" && "65px"};
-  padding-top: ${({ controlheader }) => controlheader === "/creator" && "65px"};
+  padding-top: ${({ controlheader }) =>
+    controlheader.startsWith("/verify-visit") && "65px"};
   padding-bottom: ${({ controlheader }) => controlheader === "/home" && "72px"};
 `;
 

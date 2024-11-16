@@ -93,10 +93,7 @@ export default function Mypage() {
             onClick={() => setIsCreator(!isCreator)}
           />
         </nav>
-        <Profile 
-          title="Angie"
-          src = "/images/yy_angie_profile.svg"
-        />
+        <Profile title="Angie" src="/images/yy_angie_profile.svg" />
         <AngieTab
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -133,7 +130,7 @@ export default function Mypage() {
   );
 }
 
-const Profile = ({ title, src}: { title: string, src: string }) => {
+const Profile = ({ title, src }: { title: string; src: string }) => {
   return (
     <div className="flex flex-col items-start justify-center">
       <div className="flex flex-row items-center justify-start ml-8">

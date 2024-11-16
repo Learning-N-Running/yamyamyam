@@ -7,7 +7,7 @@ import MyPageTab from "@/components/common/MypageTab";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import colors from "@/styles/color";
 import { Body2Semibold } from "@/styles/texts";
-import SlideUpModal from "@/components/base/SlideUpModal";
+import SlideUpModal from "@/components/base/SlideUpButtonModal";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { getWeb3Provider, getSigner } from "@dynamic-labs/ethers-v6";
 import { ethers, parseEther, Contract } from "ethers";

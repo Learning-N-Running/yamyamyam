@@ -7,7 +7,7 @@ import Image from "next/image";
 import HomeSearchBar from "@/components/common/HomeSearchBar";
 import InteractionButtons from "./InteractionButtons";
 import InfoTab from "./InfoTab";
-import SlideUpModal from "@/components/base/SlideUpModal";
+import SlideUpModal from "@/components/base/SlideUpButtonModal";
 import CalendarInput from "@/components/base/CalendarInput";
 import Modal from "@/components/common/Modal";
 import { LongOrangeButton } from "@/components/base/LongOrangeButton";
@@ -59,9 +59,9 @@ export default function Home() {
   const mapImage = () => {
     switch (mapImageNumber) {
       case 2:
-        return "/images/yy_home_map2.png";
-      case 3:
         return "/images/yy_home_map3.png";
+      case 3:
+        return "/images/yy_home_map2.png";
       default:
         return "/images/yy_home_map1.png";
     }

@@ -8,12 +8,14 @@ import "next-cloudinary/dist/cld-video-player.css";
 import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { useRouter } from "next/navigation";
+import { viemChainToCustomNetwork } from "@/lib/chainConverter";
+import { mantle } from "viem/chains";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Hanseek",
-  description: "Korean food shorts Platform",
+  title: "yumyumyum",
+  description: "Food Reveiwing NFT Platform",
 };
 
 export default function RootLayout({
@@ -31,6 +33,14 @@ export default function RootLayout({
             settings={{
               environmentId: dynamic_pkey as string,
               walletConnectors: [EthereumWalletConnectors],
+              overrides: {
+                evmNetworks: [
+                  viemChainToCustomNetwork(
+                    mantle,
+                    "https://cdn-icons-png.flaticon.com/512/14446/14446189.png"
+                  ),
+                ],
+              },
             }}
           >
             <Layout>{children}</Layout>
