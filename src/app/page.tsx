@@ -13,11 +13,10 @@ export default function HomeBeforeLogin() {
   return (
     <Container>
       <Image
-        src="/images/hs_beforelogin_logo.svg"
+        src="/images/yy_beforelogin_logo.svg"
         alt={"logo"}
-        width={315.66}
-        height={95.22}
-        style={{ margin: "0px 0px 107px 0" }}
+        width={846}
+        height={557}
       />
       <LoginButton />
     </Container>
@@ -28,7 +27,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${colors.primary};
+  background-color: ${colors.white};
   height: 100%;
-  padding: 348px 24px 0 24px;
+  padding: 100px 0 25px 0;
 `;

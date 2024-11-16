@@ -55,11 +55,13 @@ const LoginButton = () => {
 export default LoginButton;
 
 const LoginBaseButton = styled.div`
-  width: 100%;
+  width: 95%;
   height: 64px;
 
-  background-color: white;
-  color: ${colors.primary};
+  margin-top: 50px;
+
+  background-color: black;
+  color: ${colors.white};
 
   font-weight: 600;
   font-size: 20px;
@@ -75,9 +77,9 @@ const LoginBaseButton = styled.div`
   align-items: center;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #1b1b1b;
   }
   &:active {
-    background-color: #d9d9d9; /* 클릭 시 조금 더 어두운 색상 */
+    background-color: #1b1b1b; /* 클릭 시 조금 더 어두운 색상 */
   }
 `;

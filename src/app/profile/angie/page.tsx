@@ -146,24 +146,11 @@ const Profile = ({ title, src }: { title: string; src: string }) => {
           <div className="flex flex-row  mt-2">
             <Image
               className="mr-1"
-              src="/images/user_check.svg"
+              src="/images/yy_angie_following_state.svg"
               alt="user_check"
-              width={18}
-              height={18}
+              width={297}
+              height={20}
             />
-            <p>
-              Following <strong>21</strong>
-            </p>
-            <Image
-              className="ml-4 mr-1"
-              src="/images/users.svg"
-              alt="users"
-              width={18}
-              height={18}
-            />
-            <p>
-              Follow <strong>320</strong>
-            </p>
           </div>
         </div>
       </div>
@@ -182,13 +169,13 @@ const Profile = ({ title, src }: { title: string; src: string }) => {
       >
         <Image
           className="cursor-pointer"
-          src="/images/yy_mypage_nft_button.svg"
+          src="/images/yy_angie_nft_button.svg"
           alt="profile details"
           width={356}
           height={65}
         />
         <Image
-          src="/images/yy_mypage_usdc_button.svg"
+          src="/images/yy_angie_usdc_button.svg"
           alt="profile details"
           width={356}
           height={65}

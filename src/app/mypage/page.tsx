@@ -173,7 +173,7 @@ const Profile = ({ title, src}: { title: string, src: string }) => {
       <div className="flex flex-col items-center justify-center">
         <Image
           className="mt-5 mb-5"
-          src="/images/yy_mypage_detail.png"
+          src="/images/yy_yennie_profile_detail.png"
           alt="profile details"
           width={704}
           height={66}

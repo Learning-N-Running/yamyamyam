@@ -23,7 +23,12 @@ export default function AngieTab({
       activeIcon: "/images/yy_clicked_map_icon.svg",
     },
     {
-      name: "Visited NFT",
+      name: "Collection",
+      icon: "/images/yy_collection_icon.svg",
+      activeIcon: "/images/yy_clicked_collection.svg",
+    },
+    {
+      name: "NFT",
       icon: "/images/yy_nft_icon.svg",
       activeIcon: "/images/yy_clicked_nft_icon.svg",
     },
@@ -62,7 +67,8 @@ export default function AngieTab({
 
       <div className="mt-4">
         {activeTab === "Map" && <MapContent />}
-        {activeTab === "Visited NFT" && <NFTContent />}
+        {activeTab === "Collection" && <CollectionContent />}
+        {activeTab === "NFT" && <NFTContent />}
       </div>
     </>
   );
@@ -82,41 +88,47 @@ const MapContent = () => {
   );
 };
 
+const CollectionContent = () => {
+  return (
+    <div className="flex justify-center">
+      <Image
+        src={"/images/yy_collection_content.svg"}
+        alt="collection"
+        width={720}
+        height={867}
+        style={{ cursor: "pointer", marginTop: "16px", marginBottom: "50px" }}
+      />
+    </div>
+  );
+};
+
 const NFTContent = () => {
   return (
-    <div className="flex flex-wrap justify-start max-w-[720px] mx-auto">
-      <Image
-        className="mr-2 mb-4"
-        src="/images/yy_profile_nft_1.svg"
-        alt={`nft`}
-        width={230}
-        height={270}
-        style={{ cursor: "pointer" }}
-      />
-      <Image
-        className="mr-2 mb-4"
-        src="/images/yy_profile_nft_2.svg"
-        alt={`nft`}
-        width={230}
-        height={270}
-        style={{ cursor: "pointer" }}
-      />
-      <Image
-        className="mr-2 mb-4"
-        src="/images/yy_profile_nft_3.svg"
-        alt={`nft`}
-        width={230}
-        height={270}
-        style={{ cursor: "pointer" }}
-      />
-      <Image
-        className="mr-2 mb-4"
-        src="/images/yy_profile_nft_4.svg"
-        alt={`nft`}
-        width={230}
-        height={270}
-        style={{ cursor: "pointer" }}
-      />
+    <div className="flex flex-wrap justify-start max-w-[720px] mx-auto mb-80">
+          <Image
+            className="mr-2 mb-4"
+            src="/images/yy_nft_content_1.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
+            style={{ cursor: "pointer" }}
+          />
+          <Image
+            className="mr-2 mb-4"
+            src="/images/yy_nft_content_2.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
+            style={{ cursor: "pointer" }}
+          />
+          <Image
+            className="mr-2 mb-4"
+            src="/images/yy_nft_content_3.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
+            style={{ cursor: "pointer" }}
+          />
     </div>
   );
 };
