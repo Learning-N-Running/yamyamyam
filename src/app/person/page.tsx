@@ -37,16 +37,28 @@ export default function Taste() {
   return (
     <>
       <Container>
-        {/* <Modal onClose={onCloseModal} isOpen={isModalOpen}>
+        <Modal
+          onClose={onCloseModal}
+          isOpen={isModalOpen}
+          description={"Welcome!/Start your own gourmet journey on the map."}
+          buttonText={"Go to home"}
+          buttonOnClick={() => {
+            router.push("/home");
+          }}
+        >
           <ModalContainer>
-            <img width={136} src="/images/vb_you_covered.png" />
-            <h1>{"You've Covered!"}</h1>
-            <h3>Start your safe journey now.</h3>
-            <LongOrangeButton onClick={onCloseModal}>
-              Go to Homepage
-            </LongOrangeButton>
+            <Image
+              src="/images/yy_profile_created.svg"
+              width={292}
+              height={292}
+              alt="profile created"
+              style={{ marginBottom: "-55px" }}
+            />
+            <h1 style={{ fontFamily: "Galindo", fontSize: "28px" }}>
+              {"Profile Created"}
+            </h1>
           </ModalContainer>
-        </Modal> */}
+        </Modal>
         <div
           style={{
             fontSize: "28px",
@@ -64,7 +76,7 @@ export default function Taste() {
           onClick={() => setTasteNumber(tasteNumber + 1)}
         />
         <FooterWrapper>
-          <LongOrangeButton active={true} onClick={() => router.push("/home")}>
+          <LongOrangeButton active={true} onClick={() => setIsModalOpen(true)}>
             {"Let’s get started!"}
           </LongOrangeButton>
         </FooterWrapper>
@@ -84,7 +96,6 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 0 16px 0;
   & > h1 {
     font-size: 2rem;
     font-weight: 500;

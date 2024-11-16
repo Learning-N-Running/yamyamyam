@@ -98,7 +98,7 @@ export default function Mypage() {
           setActiveTab={setActiveTab}
           coinClick={coinClick}
         />
-        {isCreator ? (
+        {/* {isCreator ? (
           <CreatorBar coinClick={coinClick} withdraw={onWithdraw} />
         ) : (
           <GeneralUserBar
@@ -106,7 +106,7 @@ export default function Mypage() {
               setIsBecomeCreatorSlideUpModalOpen
             }
           />
-        )}
+        )} */}
 
         <Footer />
       </div>
@@ -175,8 +175,10 @@ const Profile = ({ title }: { title: string }) => {
           height={66}
         />
       </div>
-      <div className="flex flex-row items-center justify-between "
-      style={{width:'100%',padding:'0 24px'}}>
+      <div
+        className="flex flex-row items-center justify-between "
+        style={{ width: "100%", padding: "0 24px" }}
+      >
         <Image
           className=""
           src="/images/yy_mypage_nft_button.svg"
@@ -189,9 +191,8 @@ const Profile = ({ title }: { title: string }) => {
           alt="profile details"
           width={356}
           height={65}
-          style={{cursor : "pointer"}}
+          style={{ cursor: "pointer" }}
         />
-
       </div>
     </div>
   );
@@ -281,20 +282,7 @@ const GeneralUserBar = ({
         position: "fixed",
         bottom: "80px ",
       }}
-    >
-      <GeneralUserBarContainer>
-        <Body2Semibold style={{ color: "white" }}>
-          Share your favorite spots and get rewarded.
-        </Body2Semibold>
-        <GeneralUserButton
-          onClick={() => {
-            setIsBecomeCreatorSlideUpModalOpen(true);
-          }}
-        >
-          Become a creator
-        </GeneralUserButton>
-      </GeneralUserBarContainer>
-    </div>
+    ></div>
   );
 };
 

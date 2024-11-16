@@ -68,8 +68,11 @@ export default function Taste() {
           onClick={() => setTasteNumber(tasteNumber + 1)}
         />
         <FooterWrapper>
-          <LongOrangeButton active={true} onClick={() => router.push("/person")}>
-            {"Let’s get started!"}
+          <LongOrangeButton
+            active={true}
+            onClick={() => router.push("/person")}
+          >
+            {"Next"}
           </LongOrangeButton>
         </FooterWrapper>
       </Container>

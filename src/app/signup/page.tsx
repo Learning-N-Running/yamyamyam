@@ -36,16 +36,6 @@ export default function Signup() {
   return (
     <>
       <Container>
-        {/* <Modal onClose={onCloseModal} isOpen={isModalOpen}>
-          <ModalContainer>
-            <img width={136} src="/images/vb_you_covered.png" />
-            <h1>{"You've Covered!"}</h1>
-            <h3>Start your safe journey now.</h3>
-            <LongOrangeButton onClick={onCloseModal}>
-              Go to Homepage
-            </LongOrangeButton>
-          </ModalContainer>
-        </Modal> */}
         <div
           style={{
             fontSize: "28px",
@@ -110,7 +100,7 @@ export default function Signup() {
         <BioInput placeholder="e.g) South Korea" />
         <FooterWrapper>
           <LongOrangeButton active={true} onClick={() => router.push("/taste")}>
-            {"Let’s get started!"}
+            {"Next"}
           </LongOrangeButton>
         </FooterWrapper>
       </Container>

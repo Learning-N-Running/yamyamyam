@@ -13,159 +13,117 @@ import Modal from "@/components/common/Modal";
 import { LongOrangeButton } from "@/components/base/LongOrangeButton";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { getSigner } from "@dynamic-labs/ethers-v6";
-import { Contract, parseEther } from "ethers";
+import { Contract, defaultPath, parseEther } from "ethers";
 import colors from "@/styles/color";
 import { Heading2 } from "@/styles/texts";
 
 export default function Home() {
-  const [isSlideUpModalOpen, setIsSlideUpModalOpen] = useState(false);
-  const [isDepositPopUpModalOpen, setIsDepositPopUpModalOpen] = useState(false);
-  const [isCompletePopUpModalOpen, setIsCompletePopUpModalOpen] =
-    useState(false);
-  const [isPersonClicked, setIsPersonClicked] = useState(false);
-  const [isTimeClicked, setIsTimeClicked] = useState(false);
-  const [isGoDown, setIsGoDown] = useState(false);
+  const [isStartingModalOpen, setIsStartingModalOpen] = useState(true);
 
-  const router = useRouter();
-  const { primaryWallet } = useDynamicContext();
+  // const [isSlideUpModalOpen, setIsSlideUpModalOpen] = useState(false);
+  // const [isDepositPopUpModalOpen, setIsDepositPopUpModalOpen] = useState(false);
+  // const [isCompletePopUpModalOpen, setIsCompletePopUpModalOpen] =
+  //   useState(false);
+  // const [isPersonClicked, setIsPersonClicked] = useState(false);
+  // const [isTimeClicked, setIsTimeClicked] = useState(false);
+  // const [isGoDown, setIsGoDown] = useState(false);
 
-  const [txHash, setTxHash] = useState("");
-  const onPayment = async () => {
-    if (!primaryWallet) return;
-    const signer = await getSigner(primaryWallet);
-    const reservationCtrt = new Contract(
-      "0x6657eaf193969b6b8470a1C13964BaE9097D0E10",
-      ["function makeReservation() external payable"],
-      signer
-    );
-    setIsDepositPopUpModalOpen(false);
-    setIsCompletePopUpModalOpen(true);
+  // const router = useRouter();
+  // const { primaryWallet } = useDynamicContext();
 
-    const tx = await reservationCtrt.makeReservation({
-      value: parseEther("40"),
-    });
+  // const [txHash, setTxHash] = useState("");
+  // const onPayment = async () => {
+  //   if (!primaryWallet) return;
+  //   const signer = await getSigner(primaryWallet);
+  //   const reservationCtrt = new Contract(
+  //     "0x6657eaf193969b6b8470a1C13964BaE9097D0E10",
+  //     ["function makeReservation() external payable"],
+  //     signer
+  //   );
+  //   setIsDepositPopUpModalOpen(false);
+  //   setIsCompletePopUpModalOpen(true);
 
-    await tx.wait();
+  //   const tx = await reservationCtrt.makeReservation({
+  //     value: parseEther("40"),
+  //   });
 
-    setTxHash(tx.hash);
+  //   await tx.wait();
+
+  //   setTxHash(tx.hash);
+  // };
+
+  const [mapImageNumber, setMapImageNumber] = useState(1);
+
+  const mapImage = () => {
+    switch (mapImageNumber) {
+      case 2:
+        return "/images/yy_home_map2.png";
+      case 3:
+        return "/images/yy_home_map3.png";
+      default:
+        return "/images/yy_home_map1.png";
+    }
   };
 
   return (
     <>
       <Container>
         <HomeSearchBar />
-        <VideoContainer isGoDown={isGoDown}></VideoContainer>
-        <div style={{ width: "100%", height: "50%" }}>
-          <InteractionButtons />
-          <InfoTab
-            handleOpenSlideUpModal={() => setIsSlideUpModalOpen(true)}
-            isGoDown={isGoDown}
-          />
-        </div>
-
-        <Image
-          src="/images/hs_updown.png"
-          alt="up down"
-          width={80}
-          height={136}
-          onClick={() => setIsGoDown(!isGoDown)}
-          style={{
-            position: "absolute",
-            bottom: "100px",
-            right: "4px",
-            cursor: "pointer",
+        <FullscreenImage
+          src={mapImage()}
+          alt="map1"
+          layout="fill" /* Next.js Image를 화면 전체로 확장 */
+          priority /* 초기 렌더링에서 이미지 우선 로드 */
+          onClick={() => {
+            if (mapImageNumber !== 3) {
+              setMapImageNumber(mapImageNumber + 1);
+            } else {
+              setMapImageNumber(1);
+            }
           }}
         />
+        <LocationButton>
+          <Image
+            src="/images/yy_location_button.svg"
+            width={24}
+            height={24}
+            alt="location"
+          />
+        </LocationButton>
       </Container>
-      <SlideUpModal
-        isOpen={isSlideUpModalOpen}
-        onClose={() => setIsSlideUpModalOpen(false)}
-        buttonText="Reserve now"
-        buttonOnClick={() => setIsDepositPopUpModalOpen(true)}
-        buttonActive={isPersonClicked && isTimeClicked}
-      >
-        <Heading2
-          style={{ width: "100%", textAlign: "center", marginTop: "28px" }}
-        >
-          Book a reservation
-        </Heading2>
-        <Image
-          src="/images/hs_reservation_when.svg"
-          alt={"reservation when"}
-          width={720}
-          height={32}
-          style={{ marginTop: "33px" }}
-        />
-        <CalendarInput margin="16px 0 38px 0" />
-        <Image
-          src={
-            isPersonClicked
-              ? "/images/hs_reservation_person_active.svg"
-              : "/images/hs_reservation_person_inactive.svg"
-          }
-          alt="person"
-          width={537}
-          height={72}
-          onClick={() => setIsPersonClicked(!isPersonClicked)}
-          style={{ cursor: "pointer" }}
-        />
-        <Image
-          src={
-            isTimeClicked
-              ? "/images/hs_reservation_time_active.svg"
-              : "/images/hs_reservation_time_inactive.svg"
-          }
-          alt="time"
-          width={720}
-          height={128}
-          style={{ margin: "32px 0 51px 0", cursor: "pointer" }}
-          onClick={() => setIsTimeClicked(!isTimeClicked)}
-        />
-      </SlideUpModal>
 
       <Modal
-        onClose={() => setIsDepositPopUpModalOpen(false)}
-        isOpen={isDepositPopUpModalOpen}
-        description="The reservation will be confirmed once the deposit is paid."
-        buttonText={"Payment"}
-        buttonOnClick={onPayment}
-      >
-        <Image
-          src="/images/hs_reservation_detail.svg"
-          alt="reservation detail"
-          width={512}
-          height={224}
-        />
-      </Modal>
-      <Modal
-        onClose={() => setIsCompletePopUpModalOpen(false)}
-        isOpen={isCompletePopUpModalOpen}
-        description="Can’t wait for your visit./The creator earned a reward for helping you discover this restaurant!"
-        buttonText={"Go to My Page"}
+        onClose={() => setIsStartingModalOpen(false)}
+        isOpen={isStartingModalOpen}
+        description=""
+        buttonText={"close"}
         buttonOnClick={() => {
-          router.push("/mypage");
+          setIsStartingModalOpen(false);
         }}
-        extra={
-          <a
-            href={`https://evm-testnet.flowscan.io/tx/0x05629a87d6a44e9bf5016d95e62390167fed513fe6cdb07f9d79dda7a94e31ca`}
-            target="_blank"
-          >
-            <WhiteButton>View on Explorer</WhiteButton>
-          </a>
-        }
-        title="Your reservation is all set!"
       >
-        <div
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
-          <Image
-            src="/images/hs_payment_complete.svg"
-            alt="payment complete"
-            width={136}
-            height={147}
-            style={{ marginBottom: "16px" }}
-          />
-        </div>
+        <ModalContainer>
+          <div
+            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            <Image
+              src="/images/yy_starting_modal.svg"
+              alt="starting Modal"
+              width={320}
+              height={200}
+            />
+          </div>
+          <h1
+            style={{
+              fontFamily: "Galindo",
+              fontSize: "28px",
+              textAlign: "center",
+            }}
+          >
+            Based on your profile,
+            <br />
+            {"we've found other Foodies like you."}
+          </h1>
+        </ModalContainer>
       </Modal>
     </>
   );
@@ -173,21 +131,12 @@ export default function Home() {
 
 const Container = styled.div`
   width: 100%;
-  height: 200%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const VideoContainer = styled.div<{ isGoDown: boolean }>`
-  width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.5s ease-in-out;
-  transform: ${({ isGoDown }) => (isGoDown ? "translateY(-50%)" : "none")};
+  overflow: hidden; /* 이미지가 넘어가지 않도록 설정 */
 `;
 
 const WhiteButton = styled.div`
@@ -217,5 +166,52 @@ const WhiteButton = styled.div`
   }
   &:active {
     background-color: #d9d9d9; /* 클릭 시 조금 더 어두운 색상 */
+  }
+`;
+
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  & > h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+`;
+
+const FullscreenImage = styled(Image)`
+  object-fit: cover; /* 이미지가 왜곡 없이 화면에 맞게 채워짐 */
+  width: 100%;
+  height: 100%;
+`;
+
+const LocationButton = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  position: absolute;
+  right: 24px;
+  bottom: 100px;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${colors.white};
+
+  &:hover {
+    background-color: #f2f2f2; /* 약한 회색 */
+  }
+
+  &:active {
+    background-color: #e0e0e0; /* hover보다 약간 진한 회색 */
   }
 `;

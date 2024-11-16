@@ -12,19 +12,19 @@ export default function Footer() {
   const path = usePathname();
 
   const isMyPage = path === "/mypage";
-  const backgroundcolor = isMyPage ? colors.white : colors.black;
+  // const backgroundcolor = isMyPage ? colors.white : colors.black;
   const router = useRouter();
 
   const homeImageSrc = isMyPage
-    ? "/images/hs_foot_home_black.svg"
-    : "/images/hs_foot_home_white.svg";
+    ? "/images/yy_footer_home_inactive.svg"
+    : "/images/yy_footer_home_active.svg";
 
   const mypageImageSrc = isMyPage
-    ? "/images/hs_foot_mypage_black.svg"
-    : "/images/hs_foot_mypage_white.svg";
+    ? "/images/yy_footer_mypage_active.svg"
+    : "/images/yy_footer_mypage_inactive.svg";
 
   return (
-    <Container backgroundcolor={backgroundcolor}>
+    <Container backgroundcolor={"#000000"}>
       <Link href="/home">
         <Image
           src={homeImageSrc}
@@ -36,7 +36,7 @@ export default function Footer() {
       </Link>
       <Link href="/creator">
         <Image
-          src="/images/hs_foot_plus.svg"
+          src="/images/yy_foot_plus.svg"
           alt="plus"
           width={56}
           height={56}
