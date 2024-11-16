@@ -75,14 +75,32 @@ export default function MyPageTab({
 }
 
 const MapContent = () => {
+  const [mapNumber, setMapNumber] = useState(1);
+  const mapImgSrc = () => {
+    switch (mapNumber) {
+      case 1:
+        return "/images/yy_yennie_map_1.png";
+      case 2:
+        return "/images/yy_yennie_map_2.png";
+      case 3:
+        return "/images/yy_yennie_map_3.png";
+      case 4:
+        return "/images/yy_yennie_map_4.png";
+      default:
+        return "/images/yy_yennie_map_5.png";
+    }
+  };
   return (
     <div className="flex justify-center">
       <Image
-        src={"/images/yy_map_mypage.png"}
+        src={mapImgSrc()}
         alt="map"
         width={721}
         height={759}
         style={{ cursor: "pointer", marginTop: "16px", marginBottom: "50px" }}
+        onClick={() => {
+          setMapNumber(mapNumber + 1);
+        }}
       />
     </div>
   );
@@ -102,18 +120,17 @@ const CollectionContent = () => {
   );
 };
 
-
 const NFTContent = () => {
   return (
     <div className="flex flex-wrap justify-start max-w-[720px] mx-auto">
-          <Image
-            className="mr-2 mb-4"
-            src="/images/yy_nft_content_1.svg"
-            alt={`nft`}
-            width={230}
-            height={270}
-            style={{ cursor: "pointer", marginBottom: "300px" }}
-          />
+      <Image
+        className="mr-2 mb-4"
+        src="/images/yy_nft_content_1.svg"
+        alt={`nft`}
+        width={230}
+        height={270}
+        style={{ cursor: "pointer", marginBottom: "300px" }}
+      />
     </div>
   );
 };

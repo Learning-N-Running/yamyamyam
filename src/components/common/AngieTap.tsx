@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import VideoContent from "./VideoContent";
 import Image from "next/image";
 import { N } from "ethers";
+import { useRouter } from "next/navigation";
 
 export default function AngieTab({
   activeTab,
@@ -89,6 +90,7 @@ const MapContent = () => {
 };
 
 const CollectionContent = () => {
+  const router = useRouter();
   return (
     <div className="flex justify-center">
       <Image
@@ -97,6 +99,7 @@ const CollectionContent = () => {
         width={720}
         height={867}
         style={{ cursor: "pointer", marginTop: "16px", marginBottom: "50px" }}
+        onClick={() => router.push("/verify-visit/1")}
       />
     </div>
   );
@@ -105,30 +108,30 @@ const CollectionContent = () => {
 const NFTContent = () => {
   return (
     <div className="flex flex-wrap justify-start max-w-[720px] mx-auto mb-80">
-          <Image
-            className="mr-2 mb-4"
-            src="/images/yy_nft_content_1.svg"
-            alt={`nft`}
-            width={230}
-            height={270}
-            style={{ cursor: "pointer" }}
-          />
-          <Image
-            className="mr-2 mb-4"
-            src="/images/yy_nft_content_2.svg"
-            alt={`nft`}
-            width={230}
-            height={270}
-            style={{ cursor: "pointer" }}
-          />
-          <Image
-            className="mr-2 mb-4"
-            src="/images/yy_nft_content_3.svg"
-            alt={`nft`}
-            width={230}
-            height={270}
-            style={{ cursor: "pointer" }}
-          />
+      <Image
+        className="mr-2 mb-4"
+        src="/images/yy_nft_content_1.svg"
+        alt={`nft`}
+        width={230}
+        height={270}
+        style={{ cursor: "pointer" }}
+      />
+      <Image
+        className="mr-2 mb-4"
+        src="/images/yy_nft_content_2.svg"
+        alt={`nft`}
+        width={230}
+        height={270}
+        style={{ cursor: "pointer" }}
+      />
+      <Image
+        className="mr-2 mb-4"
+        src="/images/yy_nft_content_3.svg"
+        alt={`nft`}
+        width={230}
+        height={270}
+        style={{ cursor: "pointer" }}
+      />
     </div>
   );
 };

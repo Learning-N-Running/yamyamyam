@@ -9,7 +9,7 @@ import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
 import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
 import { useRouter } from "next/navigation";
 import { viemChainToCustomNetwork } from "@/lib/chainConverter";
-import { mantle } from "viem/chains";
+import { mantleSepoliaTestnet } from "viem/chains";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +36,7 @@ export default function RootLayout({
               overrides: {
                 evmNetworks: [
                   viemChainToCustomNetwork(
-                    mantle,
+                    mantleSepoliaTestnet,
                     "https://cdn-icons-png.flaticon.com/512/14446/14446189.png"
                   ),
                 ],

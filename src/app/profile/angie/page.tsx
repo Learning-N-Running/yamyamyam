@@ -21,20 +21,20 @@ export default function Mypage() {
   const [activeTab, setActiveTab] = useState("Map");
   const [coinClick, setCoinClick] = useState(0);
   const [isCreator, setIsCreator] = useState(false);
-  const [isBecomeCreatorSlideUpModalOpen, setIsBecomeCreatorSlideUpModalOpen] =
-    useState(false);
+  const [isSlideUpModalOpen, setIsSlideUpModalOpen] = useState(true);
 
   const [txHash, setTxHash] = useState("");
+
   const onWithdraw = async () => {
     if (!primaryWallet) return;
     const signer = await getSigner(primaryWallet);
-    const withdrawCtrt = new Contract(
+    const visitorCtrt = new Contract(
       "0xCA5802F9B1A72e47bce75AAc85D005fB3e1a584f",
       ["function withdrawCtrt(address payable user) external"],
       signer
     );
 
-    const tx = await withdrawCtrt.withdrawCtrt(await signer.getAddress());
+    const tx = await visitorCtrt.withdrawCtrt(await signer.getAddress());
 
     await tx.wait();
 
@@ -71,26 +71,13 @@ export default function Mypage() {
       <div className="bg-white">
         <nav
           className="flex items-center space-x-4 justify-end"
-          style={{ padding: "20px 24px" }}
+          style={{ width: "100%", height: "65px" }}
         >
-          <Image
-            className="cursor-pointer"
-            src="\images\system_icon.svg"
-            alt="system icon"
+          <Goback
+            src="/images/hs_goback.svg"
+            alt="go back"
             width={24}
             height={24}
-            onClick={() => {
-              setCoinClick((prev) => prev + 1);
-            }}
-          />
-
-          <Image
-            className="cursor-pointer"
-            src="\images\bell_icon.svg"
-            alt="bell icon"
-            width={24}
-            height={24}
-            onClick={() => setIsCreator(!isCreator)}
           />
         </nav>
         <Profile title="Angie" src="/images/yy_angie_profile.svg" />
@@ -99,39 +86,20 @@ export default function Mypage() {
           setActiveTab={setActiveTab}
           coinClick={coinClick}
         />
-        {/* {isCreator ? (
-          <CreatorBar coinClick={coinClick} withdraw={onWithdraw} />
-        ) : (
-          <GeneralUserBar
-            setIsBecomeCreatorSlideUpModalOpen={
-              setIsBecomeCreatorSlideUpModalOpen
-            }
-          />
-        )} */}
 
         <Footer />
       </div>
-      {/* <SlideUpModal
-        isOpen={isBecomeCreatorSlideUpModalOpen}
-        onClose={() => setIsBecomeCreatorSlideUpModalOpen(false)}
-        buttonText={"Verify with World ID"}
-        buttonOnClick={authWorldID}
+      <SlideUpModal
+        isOpen={isSlideUpModalOpen}
+        onClose={() => setIsSlideUpModalOpen(false)}
       >
-        <Image
-          src={"/images/hs_verify_world_id.svg"}
-          alt={"world id"}
-          width={720}
-          height={232}
-          style={{ margin: "72px 0 54px 0" }}
-          onClick={() => {}}
-        />
-      </SlideUpModal> */}
+        <div style={{ width: "100%", marginTop: "64px" }}>안녕하쇼</div>
+      </SlideUpModal>
     </>
   );
 }
 
 const Profile = ({ title, src }: { title: string; src: string }) => {
-
   const [isFollowed, setIsFollowed] = useState(false);
 
   const handleFollowClick = () => {
@@ -159,7 +127,7 @@ const Profile = ({ title, src }: { title: string; src: string }) => {
               height={20}
             />
           </div>
-          <div className="flex flex-row items-start justify-center">
+          <div className="flex flex-row items-start justify-center mt-3">
             <Image
               className="mr-1 cursor-pointer"
               src={
@@ -184,7 +152,7 @@ const Profile = ({ title, src }: { title: string; src: string }) => {
       </div>
       <div className="flex flex-col items-center justify-center">
         <Image
-          className="mt-5 mb-5"
+          className="mt-6 mb-2"
           src="/images/yy_mypage_detail.png"
           alt="profile details"
           width={704}
@@ -285,83 +253,9 @@ const CreatorBar = ({
   );
 };
 
-// const GeneralUserBar = ({
-//   setIsBecomeCreatorSlideUpModalOpen,
-// }: {
-//   setIsBecomeCreatorSlideUpModalOpen: Dispatch<SetStateAction<boolean>>;
-// }) => {
-//   return (
-//     <div
-//       style={{
-//         width: "100%",
-//         padding: "0px 24px",
-//         position: "fixed",
-//         bottom: "80px ",
-//       }}
-//     ></div>
-//   );
-// };
-
-// const GeneralUserBarContainer = styled.div`
-//   width: 100%;
-//   background-color: ${colors.primary};
-//   height: 68px;
-
-//   border-radius: 12px;
-
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-
-//   padding: 10px 16px;
-// `;
-
-// const GeneralUserButton = styled.div`
-//   padding: 0px 24px;
-//   height: 100%;
-
-//   background-color: white;
-//   color: ${colors.primary};
-
-//   font-weight: 600;
-//   font-size: 17px;
-//   font-family: Pretendard;
-
-//   border: none;
-//   border-radius: 100px;
-//   cursor: pointer;
-
-//   display: flex;
-//   text-align: center;
-//   justify-content: center;
-//   align-items: center;
-
-//   &:hover {
-//     background-color: #f0f0f0;
-//   }
-//   &:active {
-//     background-color: #d9d9d9; /* 클릭 시 조금 더 어두운 색상 */
-//   }
-// `;
-
-// const CreatorBar = () => {
-//   return (
-//     <div className="w-[688px] h-[68px] fixed bottom-32 left-11 z-50 flex justify-center">
-//       <div className="flex flex-row items-center bg-[#FAFAFB] p-6 justify-between w-full max-w-4xl">
-//         <p className="flex flex-row font-medium ml-4 text-xl">
-//           Do you want to be a creator?{" "}
-//           <Image
-//             className="ml-2"
-//             src="images/usdc-icon.svg"
-//             alt="usdc"
-//             width={20}
-//             height={20}
-//           />{" "}
-//         </p>
-//         <button className="text-xl justify-end bg-[#FF5924] px-6 py-3 text-white rounded-3xl mr-4 hover:bg-orange-500">
-//           Withdraw
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+const Goback = styled(Image)`
+  cursor: pointer;
+  position: absolute;
+  left: 26px;
+  top: 21px;
+`;

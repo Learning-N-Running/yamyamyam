@@ -97,7 +97,7 @@ export default function Signup() {
         >
           Bio
         </div>
-        <BioInput placeholder="e.g) South Korea" />
+        <BioInput placeholder="e.g) living in Bangkok, interested in spicy foods" />
         <FooterWrapper>
           <LongOrangeButton active={true} onClick={() => router.push("/taste")}>
             {"Next"}

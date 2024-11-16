@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function HomeSearchBar() {
+  const router = useRouter();
   // 검색어 상태
   const [query, setQuery] = useState("");
   // 검색 결과 상태
@@ -63,8 +65,9 @@ export default function HomeSearchBar() {
         alt="profile"
         width={80}
         height={80}
+        onClick={() => router.push("/mypage")}
       />
-  
+
       {showResults && (
         <ResultsContainer>
           {results.map((result, index) => (

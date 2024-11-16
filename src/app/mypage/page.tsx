@@ -10,35 +10,76 @@ import { Body2Semibold } from "@/styles/texts";
 import SlideUpModal from "@/components/base/SlideUpButtonModal";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { getWeb3Provider, getSigner } from "@dynamic-labs/ethers-v6";
-import { ethers, parseEther, Contract } from "ethers";
-import WithdrawABI from "../../abis/wtihdraw.json";
+import {
+  ethers,
+  parseEther,
+  Contract,
+  AlchemyProvider,
+  JsonRpcProvider,
+} from "ethers";
+import VisitorABI from "../../abis/Visitor_Mantle.json";
 import { withdrawAddress } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import * as react from "next-auth/react";
-import { signIn } from "next-auth/react";
+import Modal from "@/components/common/Modal";
 
 export default function Mypage() {
   const [activeTab, setActiveTab] = useState("Map");
   const [coinClick, setCoinClick] = useState(0);
-  const [isCreator, setIsCreator] = useState(false);
-  const [isBecomeCreatorSlideUpModalOpen, setIsBecomeCreatorSlideUpModalOpen] =
-    useState(false);
+  const [isPopupModalOpen, setIsPopupModalOpen] = useState(false);
+  const [isIssued, setIsIssued] = useState(false);
+  const [nftFoodType, setNftFoodType] = useState("vegetarian");
+  const [nftURI, setNftURI] = useState(
+    "https://ipfs.io/ipfs/Qma9kSWqQaPXMoMjErX3ZPQ9GkRhGHBqURMn5VaRDHQ1tP"
+  );
 
   const [txHash, setTxHash] = useState("");
-  const onWithdraw = async () => {
+  const tokenMintedABI = VisitorABI.find(
+    (item) => item.name === "TokenMinted" && item.type === "event"
+  );
+
+  const onMintNFT = async () => {
     if (!primaryWallet) return;
-    const signer = await getSigner(primaryWallet);
-    const withdrawCtrt = new Contract(
-      "0xCA5802F9B1A72e47bce75AAc85D005fB3e1a584f",
-      ["function withdrawCtrt(address payable user) external"],
-      signer
+    const userAddress = primaryWallet.address;
+
+    const provider = new JsonRpcProvider("https://rpc.sepolia.mantle.xyz");
+
+    const ownerSigner = new ethers.Wallet( //contract 소유자가 직접 트랜잭션을 보내야함.
+      process.env.NEXT_PUBLIC_PRIVATE_KEY as string,
+      provider
     );
 
-    const tx = await withdrawCtrt.withdrawCtrt(await signer.getAddress());
+    const signer = await getSigner(primaryWallet);
+    let visitorCtrt = new ethers.Contract(
+      "0xB57b268E0baE4498AA3bff0A61D7f2e6Cd951f15",
+      VisitorABI,
+      ownerSigner
+    );
+    const safeMintTx = await visitorCtrt.safeMint(userAddress);
 
-    await tx.wait();
+    const receiptSafeMint = await safeMintTx.wait();
+    console.log(safeMintTx.hash);
+    const ITokenMinted = new ethers.Interface([tokenMintedABI!]);
+    const tokenId = Number(
+      ITokenMinted.parseLog(receiptSafeMint.logs[1])?.args[1]
+    );
 
-    setTxHash(tx.hash);
+    const registerVisitorInfoTx = await visitorCtrt.registerVisitorInfo(
+      userAddress,
+      nftFoodType,
+      nftURI,
+      tokenId
+    );
+
+    const receiptRegisterVisitorInfoTx = await registerVisitorInfoTx.wait();
+    console.log(receiptRegisterVisitorInfoTx);
+
+    // Mantle 전용
+    const blockscoutLink = `https://explorer.sepolia.mantle.xyz/tx/${receiptRegisterVisitorInfoTx.hash}`;
+    window.open(blockscoutLink, "_blank", "noopener,noreferrer");
+
+    setActiveTab("NFT");
+    setIsPopupModalOpen(false);
   };
 
   const router = useRouter();
@@ -80,63 +121,75 @@ export default function Mypage() {
             width={24}
             height={24}
             onClick={() => {
-              setCoinClick((prev) => prev + 1);
+              setIsPopupModalOpen(true);
+              setIsIssued(true);
             }}
           />
-
-          <Image
-            className="cursor-pointer"
-            src="\images\bell_icon.svg"
-            alt="bell icon"
-            width={24}
-            height={24}
-            onClick={() => setIsCreator(!isCreator)}
-          />
         </nav>
-        <Profile 
+        <Profile
           title="Yennie"
-          src = "/images/yy_yennie_profile.svg"
+          src="/images/yy_yennie_profile.svg"
+          isIssued={isIssued}
         />
         <MyPageTab
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           coinClick={coinClick}
         />
-        {/* {isCreator ? (
-          <CreatorBar coinClick={coinClick} withdraw={onWithdraw} />
-        ) : (
-          <GeneralUserBar
-            setIsBecomeCreatorSlideUpModalOpen={
-              setIsBecomeCreatorSlideUpModalOpen
-            }
-          />
-        )} */}
-
         <Footer />
       </div>
-      {/* <SlideUpModal
-        isOpen={isBecomeCreatorSlideUpModalOpen}
-        onClose={() => setIsBecomeCreatorSlideUpModalOpen(false)}
-        buttonText={"Verify with World ID"}
-        buttonOnClick={authWorldID}
+      <Modal
+        onClose={() => setIsPopupModalOpen(false)}
+        isOpen={isPopupModalOpen}
+        description={
+          "You can claim a new NFT by Verifing Vegetarian food 5 times."
+        }
+        buttonText={"Claim!"}
+        buttonOnClick={() => {
+          onMintNFT();
+        }}
       >
-        <Image
-          src={"/images/hs_verify_world_id.svg"}
-          alt={"world id"}
-          width={720}
-          height={232}
-          style={{ margin: "72px 0 54px 0" }}
-          onClick={() => {}}
-        />
-      </SlideUpModal> */}
+        <ModalContainer>
+          <Image
+            src="/images/yy_mypage_nft_claim.svg"
+            width={220}
+            height={222}
+            alt="nft claim"
+            style={{ marginBottom: "30px" }}
+          />
+          <h1
+            style={{
+              fontFamily: "Galindo",
+              fontSize: "28px",
+              marginBottom: "-8px",
+            }}
+          >
+            {"Congratulations"}
+          </h1>
+        </ModalContainer>
+      </Modal>
     </>
   );
 }
 
-const Profile = ({ title, src}: { title: string, src: string }) => {
+const Profile = ({
+  title,
+  src,
+  isIssued,
+}: {
+  title: string;
+  src: string;
+  isIssued: boolean;
+}) => {
   return (
     <div className="flex flex-col items-start justify-center">
       <div className="flex flex-row items-center justify-start ml-8">
+        <Goback
+          src="/images/hs_goback.svg"
+          alt="go back"
+          width={24}
+          height={24}
+        />
         <Image
           className="rounded-full"
           src={src}
@@ -185,7 +238,11 @@ const Profile = ({ title, src}: { title: string, src: string }) => {
       >
         <Image
           className="cursor-pointer"
-          src="/images/yy_mypage_nft_button.svg"
+          src={
+            isIssued
+              ? "/images/yy_mypage_nft_button_active.svg"
+              : "/images/yy_mypage_nft_button_inactive.svg"
+          }
           alt="profile details"
           width={356}
           height={65}
@@ -202,154 +259,25 @@ const Profile = ({ title, src}: { title: string, src: string }) => {
   );
 };
 
-const CreatorBar = ({
-  coinClick,
-  withdraw,
-}: {
-  coinClick: number;
-  withdraw: any;
-}) => {
-  const coinNum = () => {
-    if (coinClick === 1) {
-      return 95.5;
-    } else if (coinClick == 2) {
-      return 100.1;
-    } else return 90.0;
-  };
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  & > h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+`;
 
-  return (
-    <div
-      style={{
-        width: "100%",
-        padding: "0px 24px",
-        position: "fixed",
-        bottom: "80px ",
-      }}
-    >
-      <div
-        className="flex bg-[#FAFAFB] p-4 w-full"
-        style={{ borderRadius: "8px", display: "flex", alignItems: "center" }}
-      >
-        <div>
-          <p className="ml-3 p-1 flex flex-row text-[#FF7700]">
-            {" "}
-            <Image
-              className="mr-1"
-              src="/images/warn_icon.svg"
-              alt="Warning icon"
-              width={12}
-              height={12}
-            />{" "}
-            Minimum 100 FLOW required to withdraw.
-          </p>
-          <p className="flex flex-row font-medium ml-4 text-xl">
-            Total Rewards Earned:{" "}
-            <Image
-              className="ml-2"
-              src="/images/hs_flow_logo.svg"
-              alt="flow"
-              width={20}
-              height={20}
-              style={{ marginRight: "6px" }}
-            />{" "}
-            <b>{coinNum().toFixed(2)}</b>
-          </p>
-        </div>
-        <button
-          className={`fixed top-50 right-16 text-xl px-6 py-3 rounded-3xl ${
-            coinNum() >= 100
-              ? "bg-[#FF5924] text-white hover:bg-orange-500"
-              : "bg-gray-300 text-white cursor-not-allowed"
-          }`}
-          disabled={coinNum() < 100}
-          onClick={() => {
-            withdraw();
-          }}
-        >
-          Withdraw
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// const GeneralUserBar = ({
-//   setIsBecomeCreatorSlideUpModalOpen,
-// }: {
-//   setIsBecomeCreatorSlideUpModalOpen: Dispatch<SetStateAction<boolean>>;
-// }) => {
-//   return (
-//     <div
-//       style={{
-//         width: "100%",
-//         padding: "0px 24px",
-//         position: "fixed",
-//         bottom: "80px ",
-//       }}
-//     ></div>
-//   );
-// };
-
-// const GeneralUserBarContainer = styled.div`
-//   width: 100%;
-//   background-color: ${colors.primary};
-//   height: 68px;
-
-//   border-radius: 12px;
-
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-
-//   padding: 10px 16px;
-// `;
-
-// const GeneralUserButton = styled.div`
-//   padding: 0px 24px;
-//   height: 100%;
-
-//   background-color: white;
-//   color: ${colors.primary};
-
-//   font-weight: 600;
-//   font-size: 17px;
-//   font-family: Pretendard;
-
-//   border: none;
-//   border-radius: 100px;
-//   cursor: pointer;
-
-//   display: flex;
-//   text-align: center;
-//   justify-content: center;
-//   align-items: center;
-
-//   &:hover {
-//     background-color: #f0f0f0;
-//   }
-//   &:active {
-//     background-color: #d9d9d9; /* 클릭 시 조금 더 어두운 색상 */
-//   }
-// `;
-
-// const CreatorBar = () => {
-//   return (
-//     <div className="w-[688px] h-[68px] fixed bottom-32 left-11 z-50 flex justify-center">
-//       <div className="flex flex-row items-center bg-[#FAFAFB] p-6 justify-between w-full max-w-4xl">
-//         <p className="flex flex-row font-medium ml-4 text-xl">
-//           Do you want to be a creator?{" "}
-//           <Image
-//             className="ml-2"
-//             src="images/usdc-icon.svg"
-//             alt="usdc"
-//             width={20}
-//             height={20}
-//           />{" "}
-//         </p>
-//         <button className="text-xl justify-end bg-[#FF5924] px-6 py-3 text-white rounded-3xl mr-4 hover:bg-orange-500">
-//           Withdraw
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+const Goback = styled(Image)`
+  cursor: pointer;
+  position: absolute;
+  left: 26px;
+  top: 21px;
+`;
