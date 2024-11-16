@@ -74,15 +74,7 @@ export default function Mypage() {
           style={{ padding: "20px 24px" }}
         >
           <Image
-            className=""
-            src="\images\bell_icon.svg"
-            alt="bell icon"
-            width={24}
-            height={24}
-            onClick={() => setIsCreator(!isCreator)}
-          />
-          <Image
-            className=""
+            className="cursor-pointer"
             src="\images\system_icon.svg"
             alt="system icon"
             width={24}
@@ -90,6 +82,15 @@ export default function Mypage() {
             onClick={() => {
               setCoinClick((prev) => prev + 1);
             }}
+          />
+
+          <Image
+            className="cursor-pointer"
+            src="\images\bell_icon.svg"
+            alt="bell icon"
+            width={24}
+            height={24}
+            onClick={() => setIsCreator(!isCreator)}
           />
         </nav>
         <Profile title="Angie" />
@@ -110,7 +111,7 @@ export default function Mypage() {
 
         <Footer />
       </div>
-      <SlideUpModal
+      {/* <SlideUpModal
         isOpen={isBecomeCreatorSlideUpModalOpen}
         onClose={() => setIsBecomeCreatorSlideUpModalOpen(false)}
         buttonText={"Verify with World ID"}
@@ -124,7 +125,7 @@ export default function Mypage() {
           style={{ margin: "72px 0 54px 0" }}
           onClick={() => {}}
         />
-      </SlideUpModal>
+      </SlideUpModal> */}
     </>
   );
 }
@@ -269,64 +270,64 @@ const CreatorBar = ({
   );
 };
 
-const GeneralUserBar = ({
-  setIsBecomeCreatorSlideUpModalOpen,
-}: {
-  setIsBecomeCreatorSlideUpModalOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
-  return (
-    <div
-      style={{
-        width: "100%",
-        padding: "0px 24px",
-        position: "fixed",
-        bottom: "80px ",
-      }}
-    ></div>
-  );
-};
+// const GeneralUserBar = ({
+//   setIsBecomeCreatorSlideUpModalOpen,
+// }: {
+//   setIsBecomeCreatorSlideUpModalOpen: Dispatch<SetStateAction<boolean>>;
+// }) => {
+//   return (
+//     <div
+//       style={{
+//         width: "100%",
+//         padding: "0px 24px",
+//         position: "fixed",
+//         bottom: "80px ",
+//       }}
+//     ></div>
+//   );
+// };
 
-const GeneralUserBarContainer = styled.div`
-  width: 100%;
-  background-color: ${colors.primary};
-  height: 68px;
+// const GeneralUserBarContainer = styled.div`
+//   width: 100%;
+//   background-color: ${colors.primary};
+//   height: 68px;
 
-  border-radius: 12px;
+//   border-radius: 12px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
 
-  padding: 10px 16px;
-`;
+//   padding: 10px 16px;
+// `;
 
-const GeneralUserButton = styled.div`
-  padding: 0px 24px;
-  height: 100%;
+// const GeneralUserButton = styled.div`
+//   padding: 0px 24px;
+//   height: 100%;
 
-  background-color: white;
-  color: ${colors.primary};
+//   background-color: white;
+//   color: ${colors.primary};
 
-  font-weight: 600;
-  font-size: 17px;
-  font-family: Pretendard;
+//   font-weight: 600;
+//   font-size: 17px;
+//   font-family: Pretendard;
 
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
+//   border: none;
+//   border-radius: 100px;
+//   cursor: pointer;
 
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+//   display: flex;
+//   text-align: center;
+//   justify-content: center;
+//   align-items: center;
 
-  &:hover {
-    background-color: #f0f0f0;
-  }
-  &:active {
-    background-color: #d9d9d9; /* 클릭 시 조금 더 어두운 색상 */
-  }
-`;
+//   &:hover {
+//     background-color: #f0f0f0;
+//   }
+//   &:active {
+//     background-color: #d9d9d9; /* 클릭 시 조금 더 어두운 색상 */
+//   }
+// `;
 
 // const CreatorBar = () => {
 //   return (

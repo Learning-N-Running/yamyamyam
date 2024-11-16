@@ -68,8 +68,8 @@ export default function Mypage() {
 
   return (
     <>
-      <div className="bg-white">
-        <nav
+      <div className="bg-white mt-14" >
+        {/* <nav
           className="flex items-center space-x-4 justify-end"
           style={{ padding: "20px 24px" }}
         >
@@ -91,7 +91,7 @@ export default function Mypage() {
               setCoinClick((prev) => prev + 1);
             }}
           />
-        </nav>
+        </nav> */}
         <Profile title="Yennie" />
         <MyPageTab
           activeTab={activeTab}
