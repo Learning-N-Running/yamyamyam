@@ -93,7 +93,10 @@ export default function Mypage() {
             onClick={() => setIsCreator(!isCreator)}
           />
         </nav>
-        <Profile title="Angie" />
+        <Profile 
+          title="Yennie"
+          src = "/images/yy_yennie_profile.svg"
+        />
         <MyPageTab
           activeTab={activeTab}
           setActiveTab={setActiveTab}
@@ -130,13 +133,13 @@ export default function Mypage() {
   );
 }
 
-const Profile = ({ title }: { title: string }) => {
+const Profile = ({ title, src}: { title: string, src: string }) => {
   return (
     <div className="flex flex-col items-start justify-center">
       <div className="flex flex-row items-center justify-start ml-8">
         <Image
           className="rounded-full"
-          src="/images/yy_mypage_profile_img.svg"
+          src={src}
           alt="my page profile"
           width={126}
           height={126}

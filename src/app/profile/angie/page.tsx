@@ -3,7 +3,7 @@
 import styled, { keyframes } from "styled-components";
 import Footer from "@/layout/Footer";
 import Image from "next/image";
-import MyPageTab from "@/components/common/MypageTab";
+import AngieTab from "@/components/common/AngieTap";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import colors from "@/styles/color";
 import { Body2Semibold } from "@/styles/texts";
@@ -68,21 +68,13 @@ export default function Mypage() {
 
   return (
     <>
-      <div className="bg-white mt-14" >
-        {/* <nav
+      <div className="bg-white">
+        <nav
           className="flex items-center space-x-4 justify-end"
           style={{ padding: "20px 24px" }}
         >
           <Image
-            className=""
-            src="\images\bell_icon.svg"
-            alt="bell icon"
-            width={24}
-            height={24}
-            onClick={() => setIsCreator(!isCreator)}
-          />
-          <Image
-            className=""
+            className="cursor-pointer"
             src="\images\system_icon.svg"
             alt="system icon"
             width={24}
@@ -91,9 +83,21 @@ export default function Mypage() {
               setCoinClick((prev) => prev + 1);
             }}
           />
-        </nav> */}
-        <Profile title="Yennie" />
-        <MyPageTab
+
+          <Image
+            className="cursor-pointer"
+            src="\images\bell_icon.svg"
+            alt="bell icon"
+            width={24}
+            height={24}
+            onClick={() => setIsCreator(!isCreator)}
+          />
+        </nav>
+        <Profile 
+          title="Angie"
+          src = "/images/yy_angie_profile.svg"
+        />
+        <AngieTab
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           coinClick={coinClick}
@@ -110,7 +114,7 @@ export default function Mypage() {
 
         <Footer />
       </div>
-      <SlideUpModal
+      {/* <SlideUpModal
         isOpen={isBecomeCreatorSlideUpModalOpen}
         onClose={() => setIsBecomeCreatorSlideUpModalOpen(false)}
         buttonText={"Verify with World ID"}
@@ -124,62 +128,46 @@ export default function Mypage() {
           style={{ margin: "72px 0 54px 0" }}
           onClick={() => {}}
         />
-      </SlideUpModal>
+      </SlideUpModal> */}
     </>
   );
 }
 
-const Profile = ({ title }: { title: string }) => {
-
-    const [isFollowed, setIsFollowed] = useState(false);
-
-    const handleFollowClick = () => {
-      setIsFollowed(!isFollowed);
-    };
-
-
+const Profile = ({ title, src}: { title: string, src: string }) => {
   return (
     <div className="flex flex-col items-start justify-center">
       <div className="flex flex-row items-center justify-start ml-8">
         <Image
           className="rounded-full"
-          src="/images/hs_profile_mypage.svg"
-          alt="mypage_profile"
-          width={100}
-          height={100}
+          src={src}
+          alt="my page profile"
+          width={126}
+          height={126}
         />
         <div className="flex flex-col items-start justify-center ml-4">
-          <h2 className=" text-3xl font-bold">{title}</h2>
-          <div className="flex">
+          <h2 className="mt-4 text-3xl font-bold">{title}</h2>
+          <div className="flex flex-row  mt-2">
             <Image
-                src="/images/yy_follow_state.svg"
-                alt="message_button"
-                width={297}
-                height={20}
+              className="mr-1"
+              src="/images/user_check.svg"
+              alt="user_check"
+              width={18}
+              height={18}
             />
+            <p>
+              Following <strong>21</strong>
+            </p>
+            <Image
+              className="ml-4 mr-1"
+              src="/images/users.svg"
+              alt="users"
+              width={18}
+              height={18}
+            />
+            <p>
+              Follow <strong>320</strong>
+            </p>
           </div>
-          <div className="flex fkex-row items-start justify-center">
-            <Image
-              className="mr-1 cursor-pointer"
-              src={
-                isFollowed
-                  ? "/images/yy_clicked_follow.svg"
-                  : "/images/yy_follow_button.svg"
-              }
-              alt="follow_button"
-              width={150}
-              height={44}
-              onClick={handleFollowClick}
-            />
-            <Image
-                className="mr-1 cursor-pointer"
-                src="/images/yy_message_button.svg"
-                alt="message_button"
-                width={150}
-                height={44}
-            />
-        </div>
-
         </div>
       </div>
       <div className="flex flex-col items-center justify-center">
@@ -191,10 +179,12 @@ const Profile = ({ title }: { title: string }) => {
           height={66}
         />
       </div>
-      <div className="flex flex-row items-center justify-between "
-      style={{width:'100%',padding:'0 24px'}}>
+      <div
+        className="flex flex-row items-center justify-between "
+        style={{ width: "100%", padding: "0 24px" }}
+      >
         <Image
-          className=""
+          className="cursor-pointer"
           src="/images/yy_mypage_nft_button.svg"
           alt="profile details"
           width={356}
@@ -205,9 +195,8 @@ const Profile = ({ title }: { title: string }) => {
           alt="profile details"
           width={356}
           height={65}
-          style={{cursor : "pointer"}}
+          style={{ cursor: "pointer" }}
         />
-
       </div>
     </div>
   );
@@ -297,20 +286,7 @@ const CreatorBar = ({
 //         position: "fixed",
 //         bottom: "80px ",
 //       }}
-//     >
-//       <GeneralUserBarContainer>
-//         <Body2Semibold style={{ color: "white" }}>
-//           Share your favorite spots and get rewarded.
-//         </Body2Semibold>
-//         <GeneralUserButton
-//           onClick={() => {
-//             setIsBecomeCreatorSlideUpModalOpen(true);
-//           }}
-//         >
-//           Become a creator
-//         </GeneralUserButton>
-//       </GeneralUserBarContainer>
-//     </div>
+//     ></div>
 //   );
 // };
 

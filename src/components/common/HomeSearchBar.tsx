@@ -58,6 +58,13 @@ export default function HomeSearchBar() {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
+      <Image
+        src="/images/yy_home_profile.svg"
+        alt="profile"
+        width={80}
+        height={80}
+      />
+  
       {showResults && (
         <ResultsContainer>
           {results.map((result, index) => (

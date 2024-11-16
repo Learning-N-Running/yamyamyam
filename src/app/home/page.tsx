@@ -86,7 +86,7 @@ export default function Home() {
         />
         <LocationButton
           onClick={() => {
-            router.push("/profile/yennie"); // 이동하려는 경로로 라우팅
+            router.push("/profile/angie"); // 이동하려는 경로로 라우팅
           }}
         >
           <Image
