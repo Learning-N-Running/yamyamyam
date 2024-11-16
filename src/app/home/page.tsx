@@ -54,6 +54,8 @@ export default function Home() {
 
   const [mapImageNumber, setMapImageNumber] = useState(1);
 
+  const router = useRouter(); // useRouter 훅 사용
+
   const mapImage = () => {
     switch (mapImageNumber) {
       case 2:
@@ -82,7 +84,11 @@ export default function Home() {
             }
           }}
         />
-        <LocationButton>
+        <LocationButton
+          onClick={() => {
+            router.push("/profile/yennie"); // 이동하려는 경로로 라우팅
+          }}
+        >
           <Image
             src="/images/yy_location_button.svg"
             width={24}
