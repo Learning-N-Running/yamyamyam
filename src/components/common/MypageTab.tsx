@@ -85,17 +85,38 @@ const MapContent = () => {
 const NFTContent = () => {
   return (
     <div className="flex flex-wrap justify-start max-w-[720px] mx-auto">
-      {[...Array(4)].map((_, index) => (
-        <div key={index} className="p-2 w-1/3 flex justify-center mb-10">
           <Image
-            src="/images/yy_mypage_nft_content.svg"
-            alt={`nft-${index}`}
-            width={234}
-            height={275}
+            className="mr-2 mb-4"
+            src="/images/yy_profile_nft_1.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
             style={{ cursor: "pointer" }}
           />
-        </div>
-      ))}
+          <Image
+            className="mr-2 mb-4"
+            src="/images/yy_profile_nft_2.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
+            style={{ cursor: "pointer" }}
+          />
+          <Image
+            className="mr-2 mb-4"
+            src="/images/yy_profile_nft_3.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
+            style={{ cursor: "pointer" }}
+          />
+          <Image
+            className="mr-2 mb-4"
+            src="/images/yy_profile_nft_4.svg"
+            alt={`nft`}
+            width={230}
+            height={270}
+            style={{ cursor: "pointer" }}
+          />
     </div>
   );
 };

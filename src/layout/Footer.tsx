@@ -20,8 +20,8 @@ export default function Footer() {
     : "/images/yy_footer_home_active.svg";
 
   const mypageImageSrc = isMyPage
-    ? "/images/yy_footer_mypage_active.svg"
-    : "/images/yy_footer_mypage_inactive.svg";
+    ? "/images/yy_footer_bell_active.svg"
+    : "/images/yy_footer_bell_inactive.svg";
 
   return (
     <Container backgroundcolor={"#000000"}>

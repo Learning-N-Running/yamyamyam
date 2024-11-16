@@ -181,7 +181,7 @@ const Profile = ({ title }: { title: string }) => {
         style={{ width: "100%", padding: "0 24px" }}
       >
         <Image
-          className=""
+          className="cursor-pointer"
           src="/images/yy_mypage_nft_button.svg"
           alt="profile details"
           width={356}
