@@ -8,8 +8,10 @@ import { ethers, JsonRpcProvider } from "ethers";
 import { getSigner } from "@dynamic-labs/ethers-v6";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { useRouter } from "next/navigation";
+import { use } from "matter";
 
 export default function Message() {
+  const [tab, setTab] = useState("notification");
   const [createdGroup, setCreatedGroup] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const { primaryWallet } = useDynamicContext();
@@ -61,28 +63,49 @@ export default function Message() {
 
   return (
     <Container>
-      <Image
-        src="/images/yy_message_header_notif.png"
-        width={768}
-        height={48}
-        alt="header notif"
-      />
-      <div style={{ width: "100%", padding: "0 24px", marginTop: "25px" }}>
-        <Image
-          src="/images/yy_message_bangkok.png"
-          alt="bangkok"
-          width={255}
-          height={36}
-        />
-      </div>
-      <Image
-        src="/images/yy_message_groupchat_bangkok.png"
-        alt="message bangkok"
-        width={768}
-        height={128}
-        onClick={() => router.push("/message/vegetarian")}
-      />
-      <div></div>
+      {tab == "notification" ? (
+        <>
+          <Image
+            src="/images/yy_message_header_notif.png"
+            width={768}
+            height={48}
+            alt="header notif"
+            onClick={() => setTab("chat")}
+          />
+
+          <Image
+            src="/images/yy_message_notification.png"
+            alt="notification"
+            width={768}
+            height={348}
+          />
+        </>
+      ) : (
+        <>
+          <Image
+            src="/images/yy_message_header_chat.png"
+            width={768}
+            height={48}
+            alt="header chat"
+            onClick={() => setTab("notification")}
+          />
+          <div style={{ width: "100%", padding: "0 24px", marginTop: "25px" }}>
+            <Image
+              src="/images/yy_message_bangkok.png"
+              alt="bangkok"
+              width={255}
+              height={36}
+            />
+          </div>
+          <Image
+            src="/images/yy_message_groupchat_bangkok.png"
+            alt="message bangkok"
+            width={768}
+            height={128}
+            onClick={() => router.push("/message/vegetarian")}
+          />
+        </>
+      )}
     </Container>
   );
 }

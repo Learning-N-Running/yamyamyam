@@ -157,7 +157,6 @@ const NFTContent = () => {
             style={{ width: "400px", textAlign: "center" }}
             onClick={(e) => e.stopPropagation()} // 팝업 내부 클릭 시 닫히지 않도록 방지
           >
-
             <Image
               src={"/images/yy_mynft_popup_content_1.svg"}
               alt={`nft`}
