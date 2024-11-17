@@ -121,18 +121,66 @@ const CollectionContent = () => {
 };
 
 const NFTContent = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleImageClick = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
-    <div className="flex flex-wrap justify-start max-w-[720px] mx-auto">
-      <Image
-        className="mr-2 mb-4"
-        src="/images/yy_nft_content_1.svg"
-        alt={`nft`}
-        width={230}
-        height={270}
-        style={{ cursor: "pointer", marginBottom: "300px" }}
-      />
-    </div>
+    <>
+      <div className="flex flex-wrap justify-start max-w-[720px] mx-auto">
+        <Image
+          className="mr-2 mb-4"
+          src="/images/yy_nft_content_1.svg"
+          alt={`nft`}
+          width={230}
+          height={270}
+          style={{ cursor: "pointer", marginBottom: "300px" }}
+          onClick={handleImageClick} // 클릭 이벤트 추가
+        />
+      </div>
+
+      {/* 팝업 모달 */}
+      {isPopupOpen && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center"
+          style={{ zIndex: 1000 }}
+          onClick={closePopup} // 배경 클릭 시 팝업 닫기
+        >
+          <div
+            className="bg-white rounded-lg p-6 relative"
+            style={{ width: "400px", textAlign: "center" }}
+            onClick={(e) => e.stopPropagation()} // 팝업 내부 클릭 시 닫히지 않도록 방지
+          >
+
+            <Image
+              src={"/images/yy_mynft_popup_content_1.svg"}
+              alt={`nft`}
+              width={512}
+              height={368}
+              className="flex justify-center alignitems-center"
+            />
+            <Image
+              src={"/images/yy_mynft_popup_content_2.svg"}
+              alt={`nft`}
+              width={490}
+              height={180}
+              className="flex justify-center alignitems-center"
+            />
+            <button
+              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+              onClick={closePopup}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
-
-// public/images/yy_profile_nft_1.svg
