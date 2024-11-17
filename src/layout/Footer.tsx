@@ -11,7 +11,7 @@ interface ContainerProps {
 export default function Footer() {
   const path = usePathname();
 
-  const isMyPage = path === "/mypage";
+  const isMyPage = path === "/message";
   // const backgroundcolor = isMyPage ? colors.white : colors.black;
   const router = useRouter();
 
@@ -19,7 +19,7 @@ export default function Footer() {
     ? "/images/yy_footer_home_inactive.svg"
     : "/images/yy_footer_home_active.svg";
 
-  const mypageImageSrc = isMyPage
+  const messageImageSrc = isMyPage
     ? "/images/yy_footer_bell_active.svg"
     : "/images/yy_footer_bell_inactive.svg";
 
@@ -43,10 +43,10 @@ export default function Footer() {
           style={{ cursor: "pointer" }}
         />
       </Link>
-      <Link href="/mypage">
+      <Link href="/message">
         <Image
-          src={mypageImageSrc}
-          alt="my page"
+          src={messageImageSrc}
+          alt="message"
           width={36}
           height={36}
           style={{ cursor: "pointer" }}

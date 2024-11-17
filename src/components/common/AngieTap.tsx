@@ -8,10 +8,16 @@ export default function AngieTab({
   activeTab,
   setActiveTab,
   coinClick,
+  isSlideUpModalOpen,
+  setIsSlideUpModalOpen,
+  setIsPopUpModalOpen,
 }: {
   activeTab: string;
   setActiveTab: Dispatch<SetStateAction<string>>;
   coinClick: number;
+  isSlideUpModalOpen: any;
+  setIsSlideUpModalOpen: any;
+  setIsPopUpModalOpen: any;
 }) {
   const ColoredLine = () => (
     <hr className="w-full mt-2 h-1 bg-yellow-500 border-none m-0" />
@@ -68,7 +74,12 @@ export default function AngieTab({
 
       <div className="mt-4">
         {activeTab === "Map" && <MapContent />}
-        {activeTab === "Collection" && <CollectionContent />}
+        {activeTab === "Collection" && (
+          <CollectionContent
+            setIsSlideUpModalOpen={setIsSlideUpModalOpen}
+            setIsPopUpModalOpen={setIsPopUpModalOpen}
+          />
+        )}
         {activeTab === "NFT" && <NFTContent />}
       </div>
     </>
@@ -89,7 +100,13 @@ const MapContent = () => {
   );
 };
 
-const CollectionContent = () => {
+const CollectionContent = ({
+  setIsSlideUpModalOpen,
+  setIsPopUpModalOpen,
+}: {
+  setIsSlideUpModalOpen: any;
+  setIsPopUpModalOpen: any;
+}) => {
   const router = useRouter();
   return (
     <div className="flex justify-center">
@@ -99,7 +116,10 @@ const CollectionContent = () => {
         width={720}
         height={867}
         style={{ cursor: "pointer", marginTop: "16px", marginBottom: "50px" }}
-        onClick={() => router.push("/verify-visit/1")}
+        onClick={() => {
+          setIsPopUpModalOpen(true);
+          setIsSlideUpModalOpen(true);
+        }}
       />
     </div>
   );

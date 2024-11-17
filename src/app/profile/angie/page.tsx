@@ -21,49 +21,10 @@ export default function Mypage() {
   const [activeTab, setActiveTab] = useState("Map");
   const [coinClick, setCoinClick] = useState(0);
   const [isCreator, setIsCreator] = useState(false);
-  const [isSlideUpModalOpen, setIsSlideUpModalOpen] = useState(true);
+  const [isSlideUpModalOpen, setIsSlideUpModalOpen] = useState(false);
+  const [isPopUpModalOpen, setIsPopUpModalOpen] = useState(false);
   const [txHash, setTxHash] = useState("");
-
-  const onWithdraw = async () => {
-    if (!primaryWallet) return;
-    const signer = await getSigner(primaryWallet);
-    const visitorCtrt = new Contract(
-      "0xCA5802F9B1A72e47bce75AAc85D005fB3e1a584f",
-      ["function withdrawCtrt(address payable user) external"],
-      signer
-    );
-
-    const tx = await visitorCtrt.withdrawCtrt(await signer.getAddress());
-
-    await tx.wait();
-
-    setTxHash(tx.hash);
-  };
-
   const router = useRouter();
-
-  const { primaryWallet } = useDynamicContext();
-
-  const authWorldCoin = async () => {
-    const res = await react.signIn("worldcoin"); // when worldcoin is the only provider
-  };
-
-  const withdraw = async () => {
-    const provider = await getWeb3Provider(primaryWallet!);
-    const signer = await getSigner(primaryWallet!);
-    const creatorWallet = await signer.getAddress();
-    console.log(creatorWallet);
-
-    // let WithdrawContract = new ethers.Contract(
-    //   withdrawAddress,
-    //   WithdrawABI,
-    //   signer
-    // );
-  };
-
-  const authWorldID = async () => {
-    const res = await react.signIn("worldcoin"); // when worldcoin is the only provider
-  };
 
   return (
     <>
@@ -84,6 +45,9 @@ export default function Mypage() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           coinClick={coinClick}
+          isSlideUpModalOpen={isSlideUpModalOpen}
+          setIsSlideUpModalOpen={setIsSlideUpModalOpen}
+          setIsPopUpModalOpen={setIsPopUpModalOpen}
         />
 
         <Footer />
@@ -92,9 +56,10 @@ export default function Mypage() {
         isOpen={isSlideUpModalOpen}
         onClose={() => setIsSlideUpModalOpen(false)}
       >
-        <div 
-        className="flex flex-col items-center justify-center"
-        style={{ width: "100%", marginTop: "64px" }}>
+        <div
+          className="flex flex-col items-center justify-center"
+          style={{ width: "100%", marginTop: "64px" }}
+        >
           <Image
             src="/images/yy_angie_modal.svg"
             alt="slide up modal"
@@ -113,6 +78,30 @@ export default function Mypage() {
             onClick={() => router.push("/verify-visit/1")}
           />
         </div>
+        {isPopUpModalOpen && (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 200, // SlideUpModal보다 높은 값 설정
+              position: "fixed", // fixed로 설정해 전체 화면 기준 위치 지정
+              top: 0,
+              left: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // 필요 시 배경 추가
+            }}
+          >
+            <Image
+              src="/images/yy_reward_modal.png"
+              alt={"reward modal"}
+              width={560}
+              height={661}
+              onClick={() => setIsPopUpModalOpen(false)}
+            />
+          </div>
+        )}
       </SlideUpModal>
     </>
   );

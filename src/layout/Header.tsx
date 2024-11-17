@@ -24,9 +24,7 @@ const Header = () => {
       {pathname === "/verify-visit/2" && (
         <Header_Verify title="2. Write your review" />
       )}
-      {pathname === "/creator-terms" && (
-        <Header_Title title="Creator Agreement & Rewards" />
-      )}
+      {pathname === "/message" && <Header_Title_Center title="Message" />}
     </>
   );
 };
@@ -43,6 +41,14 @@ function Header_Title({ title }: { title: string }) {
         height={24}
         isAbsolute={true}
       />
+      <Heading3>{title}</Heading3>
+    </Container_Header_Title>
+  );
+}
+
+function Header_Title_Center({ title }: { title: string }) {
+  return (
+    <Container_Header_Title>
       <Heading3>{title}</Heading3>
     </Container_Header_Title>
   );
