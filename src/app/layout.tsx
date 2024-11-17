@@ -29,7 +29,7 @@ export default function RootLayout({
       <body>
         <GlobalStyle />
         <Providers>
-          <DynamicContextProvider
+          {/* <DynamicContextProvider
             settings={{
               environmentId: dynamic_pkey as string,
               walletConnectors: [EthereumWalletConnectors],
@@ -41,6 +41,12 @@ export default function RootLayout({
                   ),
                 ],
               },
+            }}
+          > */}
+          <DynamicContextProvider
+            settings={{
+              environmentId: dynamic_pkey as string,
+              walletConnectors: [EthereumWalletConnectors],
             }}
           >
             <Layout>{children}</Layout>

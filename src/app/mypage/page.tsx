@@ -41,8 +41,13 @@ export default function Mypage() {
   const onMintNFT = async () => {
     if (!primaryWallet) return;
     const userAddress = primaryWallet.address;
+    // Mantle 전용
+    // const provider = new JsonRpcProvider("https://rpc.sepolia.mantle.xyz");
 
-    const provider = new JsonRpcProvider("https://rpc.sepolia.mantle.xyz");
+    //Flow EVM 전용
+    const provider = new JsonRpcProvider(
+      "https://testnet.evm.nodes.onflow.org"
+    );
 
     const ownerSigner = new ethers.Wallet( //contract 소유자가 직접 트랜잭션을 보내야함.
       process.env.NEXT_PUBLIC_PRIVATE_KEY as string,
@@ -75,7 +80,11 @@ export default function Mypage() {
     console.log(receiptRegisterVisitorInfoTx);
 
     // Mantle 전용
-    const blockscoutLink = `https://explorer.sepolia.mantle.xyz/tx/${receiptRegisterVisitorInfoTx.hash}`;
+    // const blockscoutLink = `https://explorer.sepolia.mantle.xyz/tx/${receiptRegisterVisitorInfoTx.hash}`;
+
+    //Flow EVM 전용
+    const blockscoutLink = `https://evm-testnet.flowscan.io/tx/${receiptRegisterVisitorInfoTx.hash}`;
+
     window.open(blockscoutLink, "_blank", "noopener,noreferrer");
 
     setActiveTab("NFT");
